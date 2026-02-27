@@ -1,0 +1,192 @@
+# ╔═══════════════════════════════════════════════════════════════════════════════╗
+# ║                           FaceAC Configuration                                ║
+# ║                    ML Anti-Cheat with AI Detection                            ║
+# ╚═══════════════════════════════════════════════════════════════════════════════╝
+
+# ┌───────────────────────────────────────────────────────────────────────────────┐
+# │                            GENERAL SETTINGS                                   │
+# └───────────────────────────────────────────────────────────────────────────────┘
+
+# Enable debug mode for additional console output
+debug: false
+
+# Directory for saving data files
+outputDirectory: "data"
+
+# ┌───────────────────────────────────────────────────────────────────────────────┐
+# │                            DETECTION SETTINGS                                 │
+# └───────────────────────────────────────────────────────────────────────────────┘
+
+detection:
+  # Enable AI-based cheat detection
+  enabled: true
+
+  # Inference backend transport (face-backend = FACE Dashboard API).
+  server-type: "face-backend"
+  
+  # FACE Dashboard backend URL.
+  # This is the base URL of your FACE Dashboard instance.
+  endpoint: "https://svo-host.ru"
+  
+  # API key for authentication (face_xxx key from FACE Dashboard)
+  # Get your key at https://svo-host.ru dashboard → Servers → API Key
+  api-key: "your-api-key"
+
+  # Request timeout in milliseconds [1000..120000]
+  timeout-ms: 30000
+
+  retry:
+    # Number of retry attempts [0..5]
+    attempts: 2
+    # Base backoff in milliseconds [0..10000]
+    backoff-ms: 500
+
+  # Optional async healthcheck during initialize/reload
+  healthcheck:
+    enabled: false
+    path: "/health"
+
+  # HTTP is blocked by default; enable only for trusted local gateways
+  allow-http: false
+
+  # Number of ticks to collect per sample
+  # Do not change unless you know what you are doing
+  sample-size: 40
+  
+  # Interval between samples (in ticks)
+  # Do not change unless you know what you are doing
+  sample-interval: 10
+  
+  # WorldGuard integration for region-based AI check bypass.
+  # Priority system: If player is in multiple regions, the highest priority region
+  # determines if AI check is disabled.
+  # Example: Player in "spawn" (priority 0) and "pvp" (priority 10)
+  # If "spawn" is disabled but "pvp" is not - AI check WILL run (pvp has higher priority)
+  worldguard:
+    # Enable WorldGuard region checking?
+    enabled: true
+    # List of regions where AI check is disabled.
+    # Format: "world:region" or just "region" (applies to all worlds)
+    disabled-regions:
+      - "spawn:spawn"
+  
+  # Model settings
+  # Each model can have:
+  #   name: Display name shown in alerts
+  #   only-alert: When true, alerts are sent but NO punishments for this model
+  models:
+    fast:
+      name: "Fast-A1"
+      only-alert: false # Stable model - punishments enabled
+    pro:
+      name: "Pro-A1"
+      only-alert: true # Newest model - testing mode - no punishments
+    ultra:
+      name: "Ultra-A1"
+      only-alert: true # Model in development - testing mode - no punishments
+    experimental:
+      name: "Experimental" # You can change colors but change names is necessary
+      only-alert: true  # Test model- testing mode - no punishments
+# ┌───────────────────────────────────────────────────────────────────────────────┐
+# │                              ALERT SETTINGS                                   │
+# └───────────────────────────────────────────────────────────────────────────────┘
+
+alerts:
+  # Probability threshold for sending alerts (0.0 - 1.0) - lowered for early notification
+  threshold: 0.75
+  # Chat alert threshold (0.0 - 1.0). 0.20 means 0.2 and 0.3 will be shown in chat.
+  chat-threshold: 0.20
+  
+  # Send alerts to console
+  console: false
+
+# ┌───────────────────────────────────────────────────────────────────────────────┐
+# │                            VIOLATION SETTINGS                                 │
+# └───────────────────────────────────────────────────────────────────────────────┘
+
+violation:
+  # VL threshold for triggering penalties (1 = immediate penalty on first detection)
+  threshold: 40
+  
+  # VL reset value after penalty (0 = full reset)
+  # reset-value is should be /2 of threshold
+  reset-value: 20  
+  # Buffer increase multiplier: (probability - threshold) * multiplier
+  # Example: prob 1.0 with threshold 0.70 = (1.0 - 0.70) * 33.33 = 10 buffer
+  multiplier: 100.0
+  
+  # Buffer decay when probability < 0.1 (low probability threshold)
+  # Do not change unless you know what you are doing
+  decay: 0.35
+  # VL decay settings (reset VL when player is not in combat)
+  # Protects legitimate players from random false positives
+  vl-decay:
+    # Enable automatic VL decay
+    enabled: false
+    # Check interval in seconds (how often to check and reduce VL)
+    interval: 1500
+    # Amount of VL to reduce per interval
+    amount: 1
+# ┌───────────────────────────────────────────────────────────────────────────────┐
+# │                            PENALTY SETTINGS                                   │
+# └───────────────────────────────────────────────────────────────────────────────┘
+# 
+# Available action prefixes:
+#   {BAN}          - Execute ban command
+#   {KICK}         - Execute kick command  
+#   {CUSTOM_ALERT} - Send custom alert to moderators
+#   (no prefix)    - Execute raw command
+#
+# Available placeholders:
+#   {PLAYER}      - Player name
+#   {VL}          - Violation level
+#   {PROBABILITY} - Detection probability
+#   {BUFFER}      - Buffer value
+#
+# Legacy placeholders also supported: <player>, <vl>, <probability>, <buffer>
+#
+
+penalties:
+  # Minimum probability required for penalty execution (lowered for aggressiveness)
+  # Do not change unless you know what you are doing
+  min-probability: 0.01
+  
+  # Ban animation settings
+  # Epic animation: levitation + purple/pink particles + lightning strike
+  animation:
+    enabled: true
+    # Duration in ticks (20 ticks = 1 second) - decreased for fast ban
+    duration: 80
+  
+  # Actions by violation level
+  # Leave empty to avoid duplicate alerts and disable all punishment commands.
+  actions: {}
+#
+#  Example custom alert:
+#  1: "{CUSTOM_ALERT} &f{PLAYER} &bfailed &fKillaura &7(&fprob &b{PROBABILITY}&7)"
+
+# ┌───────────────────────────────────────────────────────────────────────────────┐
+# │                            FOLIA SETTINGS                                     │
+# └───────────────────────────────────────────────────────────────────────────────┘
+#
+# These settings are only used when running on a Folia server.
+# On Bukkit/Paper/Spigot/kSpigot servers, these settings are ignored.
+#
+
+folia:
+  # Enable Folia-specific optimizations
+  # When disabled, the plugin will use standard Bukkit scheduler even on Folia
+  enabled: true
+  
+  # Thread pool size for async tasks (0 = use Folia default)
+  thread-pool-size: 0
+  
+  # Entity scheduler settings
+  # Use entity-specific schedulers for entity-related tasks
+  entity-scheduler:
+    enabled: true
+  
+  # Region scheduler settings
+  # Use region-specific schedulers for location-based tasks
+  region-scheduler:
+    enabled: true

@@ -1,0 +1,65 @@
+name: FaceAC
+version: '${version}'
+main: wtf.faceac.Main
+api-version: '1.13'
+description: "FaceAC - AI Anti-Cheat"
+folia-supported: true
+
+commands:
+  faceac:
+    description: FaceAC anticheat and data collection commands
+    usage: |
+      /faceac start <NICK> <CHEAT|LEGIT|UNLABELED> "<comment>"
+      /faceac stop <NICK>
+      /faceac alerts - Toggle alerts
+      /faceac prob <player> - Show player probability
+      /faceac reload - Reload config
+    permission: faceac.admin
+    aliases: [fac, mlsac, ml]
+
+permissions:
+  faceac.admin:
+    description: Allows use of all FaceAC commands
+    default: op
+    children:
+      faceac.alerts: true
+      faceac.prob: true
+      faceac.reload: true
+      faceac.collect: true
+  faceac.alerts:
+    description: Allows toggling AI alerts
+    default: op
+  faceac.prob:
+    description: Allows using probability tracking commands
+    default: op
+  faceac.reload:
+    description: Allows reloading FaceAC configuration
+    default: op
+  faceac.collect:
+    description: Allows data collection commands
+    default: op
+  mlsac.admin:
+    description: Legacy alias for faceac.admin
+    default: false
+    children:
+      faceac.admin: true
+  mlsac.alerts:
+    description: Legacy alias for faceac.alerts
+    default: false
+    children:
+      faceac.alerts: true
+  mlsac.prob:
+    description: Legacy alias for faceac.prob
+    default: false
+    children:
+      faceac.prob: true
+  mlsac.reload:
+    description: Legacy alias for faceac.reload
+    default: false
+    children:
+      faceac.reload: true
+  mlsac.collect:
+    description: Legacy alias for faceac.collect
+    default: op
+    children:
+      faceac.collect: true
