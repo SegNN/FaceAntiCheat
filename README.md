@@ -1,209 +1,216 @@
-<p align="center">
-  <img src="https://img.shields.io/badge/FaceAC-AI_Anticheat-7c3aed?style=for-the-badge" alt="FaceAC" />
-</p>
+<!-- ▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀ -->
 
-<h1 align="center">FaceAC</h1>
+<br/>
 
 <p align="center">
-  AI-powered anticheat plugin for Minecraft servers<br/>
-  <sub>Spigot · Paper · Folia &nbsp;|&nbsp; 1.16 – 1.21 &nbsp;|&nbsp; Java 17 / 21</sub>
+  <a href="https://faceac.ru">
+    <img src="https://img.shields.io/badge/%E2%97%86_FaceAC-000?style=for-the-badge&labelColor=000&color=10b981" height="40" />
+  </a>
 </p>
 
 <p align="center">
-  <img src="https://img.shields.io/badge/MC-1.16--1.21-brightgreen?style=flat-square" />
-  <img src="https://img.shields.io/badge/Java-17_|_21-f89820?style=flat-square" />
-  <img src="https://img.shields.io/badge/Folia-supported-blue?style=flat-square" />
+  <b>AI-Powered Anticheat for Minecraft</b>
 </p>
 
----
+<p align="center">
+  <a href="https://faceac.ru"><img src="https://img.shields.io/badge/Website-faceac.ru-10b981?style=flat-square&labelColor=0a0a0a" /></a>&nbsp;
+  <img src="https://img.shields.io/badge/MC-1.16–1.21-10b981?style=flat-square&labelColor=0a0a0a" />&nbsp;
+  <img src="https://img.shields.io/badge/Java-17_·_21-10b981?style=flat-square&labelColor=0a0a0a" />&nbsp;
+  <img src="https://img.shields.io/badge/Folia-✓-10b981?style=flat-square&labelColor=0a0a0a" />
+</p>
 
-### Что это
+<br/>
 
-FaceAC — серверный плагин для Minecraft, который собирает данные движений игрока (yaw, pitch, ускорение, jerk, GCD) и отправляет их на AI-бэкенд **api.faceac.ru** для анализа нейросетью. По результату плагин автоматически выносит решение — бан, кик, флаг или наблюдение.
+<!-- ▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀ -->
 
----
+<p align="center">
+  <img src="https://raw.githubusercontent.com/catppuccin/catppuccin/main/assets/misc/transparent.png" height="1" width="700" />
+</p>
 
-### Установка
+FaceAC — серверный плагин, который в реальном времени анализирует движения игроков нейросетью и автоматически выносит вердикт.
+Плагин подключается к **[api.faceac.ru](https://api.faceac.ru)** — облачный inference, ничего не нужно хостить самому.
 
-1. Купите тариф на [faceac.ru](https://faceac.ru) и получите **API-ключ** в личном кабинете
-2. Скачайте JAR из [Releases](../../releases)
-3. Положите в `plugins/`
-4. Запустите сервер — сгенерируется `plugins/FaceAC/config.yml`
-5. Укажите `api-key` в конфиге (endpoint уже настроен по умолчанию)
-6. Перезагрузите: `/faceac reload`
+<br/>
 
----
+## Быстрый старт
 
-### Сборка
-
-```bash
-./gradlew shadowJar
+```
+1.  Купите тариф → faceac.ru → получите API-ключ в личном кабинете
+2.  Скачайте JAR → Releases → положите в plugins/
+3.  Запустите сервер → откройте plugins/FaceAC/config.yml
+4.  Вставьте api-key → /faceac reload
 ```
 
-JAR-файлы появятся в `build/libs/` — отдельно под Java 17 и 21.
+Endpoint уже прописан по умолчанию — менять не нужно.
 
----
+<br/>
 
-### Команды
+## Команды
 
-| Команда | Описание |
-|---------|----------|
-| `/faceac alerts` | Включить / выключить алерты в чат |
-| `/faceac prob <ник>` | Показать вероятность для игрока |
-| `/faceac reload` | Перезагрузить конфиг |
-| `/faceac start <ник> <CHEAT\|LEGIT> "комментарий"` | Начать запись данных |
-| `/faceac stop <ник>` | Остановить запись |
+```
+/faceac alerts                              Вкл / выкл алерты в чат
+/faceac prob <ник>                          Вероятность для игрока
+/faceac reload                              Перезагрузить конфиг
+/faceac start <ник> <CHEAT|LEGIT> "..."     Начать сбор данных
+/faceac stop <ник>                          Остановить сбор
+```
 
-Алиасы: `/fac`, `/mlsac`, `/ml`
+> Алиасы: `/fac` `/mlsac` `/ml`
 
----
+<br/>
 
-### Права (Permissions)
+## Права
 
-| Право | Что даёт | По умолчанию |
-|-------|----------|:------------:|
-| `faceac.admin` | Всё (включает дочерние) | OP |
-| `faceac.alerts` | Получать алерты в чат | OP |
-| `faceac.prob` | Команда `/faceac prob` | OP |
-| `faceac.reload` | Перезагрузка конфига | OP |
-| `faceac.collect` | Запись данных (start/stop) | OP |
+```
+faceac.admin      Полный доступ (включает всё ниже)     [OP]
+faceac.alerts     Получать алерты в чат                  [OP]
+faceac.prob       /faceac prob                           [OP]
+faceac.reload     Перезагрузка конфига                   [OP]
+faceac.collect    Запись данных (start / stop)            [OP]
+```
 
----
+<br/>
 
-### Конфигурация
+## Конфигурация
 
 <details>
-<summary><b>config.yml</b> — основные настройки</summary>
+<summary>&nbsp;&nbsp;<b>▸ config.yml</b></summary>
+<br/>
 
 ```yaml
 detection:
   enabled: true
-  endpoint: "https://api.faceac.ru"      # API сервер
-  api-key: "your-api-key"               # Ключ из faceac.ru
-  allow-http: false
+  endpoint: "https://api.faceac.ru"
+  api-key: "face_xxxxxxxxxxxxxxxx"      # ← ваш ключ с faceac.ru
   timeout-ms: 30000
-  sample-size: 40                        # тиков на сэмпл
-  sample-interval: 10                    # интервал между сэмплами
+  sample-size: 40
+  sample-interval: 10
 
 alerts:
-  threshold: 0.75          # порог для алертов
-  chat-threshold: 0.20     # порог для чат-алертов
-  console: false           # логи в консоль
+  threshold: 0.75
+  chat-threshold: 0.20
+  console: false
 
 violation:
-  threshold: 40            # VL для наказания
-  reset-value: 20          # VL после наказания
-  multiplier: 100.0        # множитель буфера
-  decay: 0.35              # затухание при low-prob
+  threshold: 40
+  reset-value: 20
+  multiplier: 100.0
+  decay: 0.35
 
 penalties:
   min-probability: 0.01
   animation:
     enabled: true
-    duration: 80           # тиков (80 = 4 сек)
-  actions: {}              # кастомные команды
+    duration: 80
+  actions: {}
 ```
 
 </details>
 
 <details>
-<summary><b>Модели</b></summary>
-
-В `config.yml` раздел `detection.models`:
+<summary>&nbsp;&nbsp;<b>▸ Модели</b></summary>
+<br/>
 
 ```yaml
-models:
-  fast:
-    name: "Fast-A1"
-    only-alert: false    # карает
-  pro:
-    name: "Pro-A1"
-    only-alert: true     # только алерт
-  ultra:
-    name: "Ultra-A1"
-    only-alert: true
-  experimental:
-    name: "Experimental"
-    only-alert: true
+detection:
+  models:
+    fast:
+      name: "Fast-A1"
+      only-alert: false       # выносит наказание
+    pro:
+      name: "Pro-A1"
+      only-alert: true        # только алерт
+    ultra:
+      name: "Ultra-A1"
+      only-alert: true
+    experimental:
+      name: "Experimental"
+      only-alert: true
 ```
 
-`only-alert: true` — модель работает в тестовом режиме, наказания не выдаёт.
+`only-alert: true` — тестовый режим, наказания не выдаёт.
 
 </details>
 
 <details>
-<summary><b>WorldGuard</b></summary>
+<summary>&nbsp;&nbsp;<b>▸ WorldGuard</b></summary>
+<br/>
 
 ```yaml
 detection:
   worldguard:
     enabled: true
     disabled-regions:
-      - "spawn:spawn"       # мир:регион
-      - "lobby"             # регион во всех мирах
+      - "spawn:spawn"         # мир:регион
+      - "lobby"               # все миры
 ```
-
-В отключённых регионах AI-проверка не запускается.
 
 </details>
 
 <details>
-<summary><b>Folia</b></summary>
+<summary>&nbsp;&nbsp;<b>▸ Folia</b></summary>
+<br/>
 
 ```yaml
 folia:
   enabled: true
-  thread-pool-size: 0       # 0 = авто
+  thread-pool-size: 0
   entity-scheduler:
     enabled: true
   region-scheduler:
     enabled: true
 ```
 
-На обычных Spigot/Paper серверах этот раздел игнорируется.
+На Spigot / Paper этот раздел игнорируется.
 
 </details>
 
 <details>
-<summary><b>messages.yml</b></summary>
+<summary>&nbsp;&nbsp;<b>▸ messages.yml</b></summary>
+<br/>
 
 ```yaml
 prefix: "&bAC &8» &r"
 alert-format: "&f{PLAYER} &bfailed &f{CHECK} &7(&fprob &b{PROBABILITY}&7)"
 ```
 
-Плейсхолдеры: `{PLAYER}`, `{CHECK}`, `{PROBABILITY}`, `{BUFFER}`, `{VL}`, `{MODEL}`
+Плейсхолдеры: `{PLAYER}` `{CHECK}` `{PROBABILITY}` `{BUFFER}` `{VL}` `{MODEL}`
 
 </details>
 
----
-
-### Кастомные наказания
-
-В `penalties.actions` можно указать команды по уровню VL:
+<details>
+<summary>&nbsp;&nbsp;<b>▸ Кастомные наказания</b></summary>
+<br/>
 
 ```yaml
 penalties:
   actions:
-    1:  "{BAN} {PLAYER}"
-    # или кастомная команда:
-    1:  "tempban {PLAYER} 1d FaceAC: Killaura ({PROBABILITY})"
+    1: "{BAN} {PLAYER}"
+    # или:
+    1: "tempban {PLAYER} 1d FaceAC: Killaura ({PROBABILITY})"
 ```
 
-Префиксы: `{BAN}`, `{KICK}`, `{CUSTOM_ALERT}` или любая серверная команда.
+Префиксы: `{BAN}` `{KICK}` `{CUSTOM_ALERT}` или любая серверная команда.
+
+</details>
+
+<br/>
+
+## Совместимость
+
+```
+Spigot              ✓
+Paper               ✓
+Folia               ✓
+kSpigot             ✓
+Minecraft 1.16–1.21 ✓
+Java 17 / 21        ✓
+```
+
+<br/>
 
 ---
 
-### Совместимость
-
-| Платформа | Статус |
-|-----------|--------|
-| Spigot | ✅ |
-| Paper | ✅ |
-| Folia | ✅ |
-| kSpigot | ✅ |
-| Minecraft 1.16 – 1.21 | ✅ |
-
----
-
-<p align="center"><sub>FaceAC — AI anticheat for Minecraft</sub></p>
+<p align="center">
+  <a href="https://faceac.ru"><img src="https://img.shields.io/badge/faceac.ru-10b981?style=flat-square&labelColor=0a0a0a&label=" /></a>
+</p>
