@@ -19,17 +19,18 @@
 
 ### Что это
 
-FaceAC собирает данные движений игрока (yaw, pitch, ускорение, jerk, GCD) и отправляет их на AI-бэкенд для анализа. По результату нейросети плагин автоматически выносит решение — бан, кик, флаг или наблюдение.
+FaceAC — серверный плагин для Minecraft, который собирает данные движений игрока (yaw, pitch, ускорение, jerk, GCD) и отправляет их на AI-бэкенд **api.faceac.ru** для анализа нейросетью. По результату плагин автоматически выносит решение — бан, кик, флаг или наблюдение.
 
 ---
 
 ### Установка
 
-1. Скачайте JAR из [Releases](../../releases) (или соберите сами — см. ниже)
-2. Положите в `plugins/`
-3. Запустите сервер — сгенерируется `plugins/FaceAC/config.yml`
-4. Укажите `endpoint` и `api-key` в конфиге
-5. Перезагрузите: `/faceac reload`
+1. Купите тариф на [faceac.ru](https://faceac.ru) и получите **API-ключ** в личном кабинете
+2. Скачайте JAR из [Releases](../../releases)
+3. Положите в `plugins/`
+4. Запустите сервер — сгенерируется `plugins/FaceAC/config.yml`
+5. Укажите `api-key` в конфиге (endpoint уже настроен по умолчанию)
+6. Перезагрузите: `/faceac reload`
 
 ---
 
@@ -77,9 +78,9 @@ JAR-файлы появятся в `build/libs/` — отдельно под Jav
 ```yaml
 detection:
   enabled: true
-  endpoint: "http://your-server:8000"   # URL бэкенда
-  api-key: "your-api-key"               # Ключ из панели
-  allow-http: true
+  endpoint: "https://api.faceac.ru"      # API сервер
+  api-key: "your-api-key"               # Ключ из faceac.ru
+  allow-http: false
   timeout-ms: 30000
   sample-size: 40                        # тиков на сэмпл
   sample-interval: 10                    # интервал между сэмплами
