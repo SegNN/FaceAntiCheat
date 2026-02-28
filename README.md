@@ -1,56 +1,86 @@
-<div align="center">
+<!-- ▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀ -->
+
+<br/>
+
+<p align="center">
   <a href="https://faceac.ru">
-    <img src="https://img.shields.io/badge/%E2%97%86_FaceAC-000?style=for-the-badge&labelColor=000&color=10b981" height="40" alt="FaceAC" />
+    <img src="https://img.shields.io/badge/%E2%97%86_FaceAC-000?style=for-the-badge&labelColor=000&color=10b981" height="40" />
   </a>
+</p>
 
-  <h3>AI-Powered Anticheat for Minecraft</h3>
+<p align="center">
+  <b>AI-Powered Anticheat for Minecraft</b>
+</p>
 
-  <p>
-    <a href="https://faceac.ru"><img src="https://img.shields.io/badge/Website-faceac.ru-10b981?style=flat-square&labelColor=0a0a0a" alt="Website" /></a>
-    <img src="https://img.shields.io/badge/MC-1.16_–_1.21-10b981?style=flat-square&labelColor=0a0a0a" alt="Minecraft Versions" />
-    <img src="https://img.shields.io/badge/Java-17_·_21-10b981?style=flat-square&labelColor=0a0a0a" alt="Java" />
-    <img src="https://img.shields.io/badge/Folia-Supported-10b981?style=flat-square&labelColor=0a0a0a" alt="Folia" />
-  </p>
-</div>
+<p align="center">
+  <a href="https://faceac.ru"><img src="https://img.shields.io/badge/Website-faceac.ru-10b981?style=flat-square&labelColor=0a0a0a" /></a>&nbsp;
+  <img src="https://img.shields.io/badge/MC-1.16–1.21-10b981?style=flat-square&labelColor=0a0a0a" />&nbsp;
+  <img src="https://img.shields.io/badge/Java-17_·_21-10b981?style=flat-square&labelColor=0a0a0a" />&nbsp;
+  <img src="https://img.shields.io/badge/Folia-✓-10b981?style=flat-square&labelColor=0a0a0a" />
+</p>
 
----
+<br/>
 
-**FaceAC** — серверный плагин, который в реальном времени анализирует движения игроков с помощью нейросети и автоматически выносит вердикт. Плагин подключается к облачному inference **[api.faceac.ru](https://api.faceac.ru)** — ничего не нужно хостить на своей стороне.
+<!-- ▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀ -->
 
-## 🚀 Быстрый старт
+<p align="center">
+  <img src="https://raw.githubusercontent.com/catppuccin/catppuccin/main/assets/misc/transparent.png" height="1" width="700" />
+</p>
 
-> [!IMPORTANT]
-> Endpoint уже прописан по умолчанию — менять его в конфиге не нужно.
+FaceAC — серверный плагин, который в реальном времени анализирует движения игроков нейросетью и автоматически выносит вердикт.
+Плагин подключается к **[api.faceac.ru](https://api.faceac.ru)** — облачный inference, ничего не нужно хостить самому.
 
-1. Купите тариф на сайте [faceac.ru](https://faceac.ru) и получите **API-ключ** в личном кабинете.
-2. Скачайте JAR-файл из раздела **Releases** и поместите его в папку `plugins/`.
-3. Запустите сервер, затем откройте сгенерированный файл `plugins/FaceAC/config.yml`.
-4. Вставьте ваш api-key и пропишите в консоли `/faceac reload`.
+<br/>
 
-## 💻 Команды и 🔐 Права
+## Быстрый старт
 
-> **Алиасы команд:** `/fac` | `/mlsac` | `/ml`
+```
+1.  Купите тариф → faceac.ru → получите API-ключ в личном кабинете
+2.  Скачайте JAR → Releases → положите в plugins/
+3.  Запустите сервер → откройте plugins/FaceAC/config.yml
+4.  Вставьте api-key → /faceac reload
+```
 
-| Команда | Описание | Право | Доступ |
-|---|---|---|---|
-| `/faceac alerts` | Вкл / выкл алерты в чат | `faceac.alerts` | OP |
-| `/faceac prob <ник>` | Показать вероятность читов для игрока | `faceac.prob` | OP |
-| `/faceac start <ник> <CHEAT\|LEGIT> "..."` | Начать сбор данных | `faceac.collect` | OP |
-| `/faceac stop <ник>` | Остановить сбор данных | `faceac.collect` | OP |
-| `/faceac reload` | Перезагрузить конфиг | `faceac.reload` | OP |
-| *Все команды* | Полный доступ ко всему функционалу | `faceac.admin` | OP |
+Endpoint уже прописан по умолчанию — менять не нужно.
 
-## ⚙️ Конфигурация
+<br/>
 
-Разверните нужный блок, чтобы посмотреть примеры настройки.
+## Команды
+
+```
+/faceac alerts                              Вкл / выкл алерты в чат
+/faceac prob <ник>                          Вероятность для игрока
+/faceac reload                              Перезагрузить конфиг
+/faceac start <ник> <CHEAT|LEGIT> "..."     Начать сбор данных
+/faceac stop <ник>                          Остановить сбор
+```
+
+> Алиасы: `/fac` `/mlsac` `/ml`
+
+<br/>
+
+## Права
+
+```
+faceac.admin      Полный доступ (включает всё ниже)     [OP]
+faceac.alerts     Получать алерты в чат                  [OP]
+faceac.prob       /faceac prob                           [OP]
+faceac.reload     Перезагрузка конфига                   [OP]
+faceac.collect    Запись данных (start / stop)            [OP]
+```
+
+<br/>
+
+## Конфигурация
 
 <details>
-<summary><b>1. Основной конфиг (config.yml)</b></summary>
+<summary>&nbsp;&nbsp;<b>▸ config.yml</b></summary>
+<br/>
 
 ```yaml
 detection:
   enabled: true
-  endpoint: "[https://api.faceac.ru](https://api.faceac.ru)"
+  endpoint: "https://api.faceac.ru"
   api-key: "face_xxxxxxxxxxxxxxxx"      # ← ваш ключ с faceac.ru
   timeout-ms: 30000
   sample-size: 40
@@ -73,14 +103,15 @@ penalties:
     enabled: true
     duration: 80
   actions: {}
+```
+
 </details>
 
 <details>
-<summary><b>2. Настройка Моделей</b></summary>
+<summary>&nbsp;&nbsp;<b>▸ Модели</b></summary>
+<br/>
 
-Установка only-alert: true включает тестовый режим (наказания не выдаются).
-
-YAML
+```yaml
 detection:
   models:
     fast:
@@ -95,27 +126,32 @@ detection:
     experimental:
       name: "Experimental"
       only-alert: true
+```
+
+`only-alert: true` — тестовый режим, наказания не выдаёт.
+
 </details>
 
 <details>
-<summary><b>3. Интеграция с WorldGuard</b></summary>
+<summary>&nbsp;&nbsp;<b>▸ WorldGuard</b></summary>
+<br/>
 
-YAML
+```yaml
 detection:
   worldguard:
     enabled: true
     disabled-regions:
       - "spawn:spawn"         # мир:регион
-      - "lobby"               # работает для всех миров
+      - "lobby"               # все миры
+```
+
 </details>
 
 <details>
-<summary><b>4. Настройки Folia</b></summary>
+<summary>&nbsp;&nbsp;<b>▸ Folia</b></summary>
+<br/>
 
-[!NOTE]
-На ядрах Spigot / Paper этот раздел полностью игнорируется.
-
-YAML
+```yaml
 folia:
   enabled: true
   thread-pool-size: 0
@@ -123,44 +159,58 @@ folia:
     enabled: true
   region-scheduler:
     enabled: true
+```
+
+На Spigot / Paper этот раздел игнорируется.
+
 </details>
 
 <details>
-<summary><b>5. Сообщения (messages.yml)</b></summary>
+<summary>&nbsp;&nbsp;<b>▸ messages.yml</b></summary>
+<br/>
 
-Доступные плейсхолдеры: {PLAYER}, {CHECK}, {PROBABILITY}, {BUFFER}, {VL}, {MODEL}
-
-YAML
+```yaml
 prefix: "&bAC &8» &r"
 alert-format: "&f{PLAYER} &bfailed &f{CHECK} &7(&fprob &b{PROBABILITY}&7)"
+```
+
+Плейсхолдеры: `{PLAYER}` `{CHECK}` `{PROBABILITY}` `{BUFFER}` `{VL}` `{MODEL}`
+
 </details>
 
 <details>
-<summary><b>6. Кастомные наказания</b></summary>
+<summary>&nbsp;&nbsp;<b>▸ Кастомные наказания</b></summary>
+<br/>
 
-Доступные префиксы: {BAN}, {KICK}, {CUSTOM_ALERT} или любая серверная команда.
-
-YAML
+```yaml
 penalties:
   actions:
     1: "{BAN} {PLAYER}"
-    # или альтернативный вариант:
+    # или:
     1: "tempban {PLAYER} 1d FaceAC: Killaura ({PROBABILITY})"
+```
+
+Префиксы: `{BAN}` `{KICK}` `{CUSTOM_ALERT}` или любая серверная команда.
+
 </details>
 
-🔌 Совместимость
-✅ Spigot
+<br/>
 
-✅ Paper
+## Совместимость
 
-✅ Folia
+```
+Spigot              ✓
+Paper               ✓
+Folia               ✓
+kSpigot             ✓
+Minecraft 1.16–1.21 ✓
+Java 17 / 21        ✓
+```
 
-✅ kSpigot
+<br/>
 
-✅ Minecraft 1.16 — 1.21
+---
 
-✅ Java 17 / 21
-
-<div align="center">
-<a href="https://faceac.ru"><img src="https://img.shields.io/badge/faceac.ru-10b981?style=flat-square&labelColor=0a0a0a&label=" alt="Website Link" /></a>
-</div>
+<p align="center">
+  <a href="https://faceac.ru"><img src="https://img.shields.io/badge/faceac.ru-10b981?style=flat-square&labelColor=0a0a0a&label=" /></a>
+</p>
